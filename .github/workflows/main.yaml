@@ -1,0 +1,26 @@
+name: Check coverage source URLs
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  coverage:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+      - name: Setup Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          cache: 'npm'
+          node-version: '16'
+      - run: npm ci
+      - run: npx ts-node ./index.ts
+        env:
+          NODE_V8_COVERAGE: ./coverage
+      - run: node ./check.js
