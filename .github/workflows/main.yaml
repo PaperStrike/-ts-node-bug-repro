@@ -1,4 +1,4 @@
-name: Check coverage source URLs
+name: Coverage source URLs
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  coverage:
+  check:
     runs-on: windows-latest
     steps:
       - name: Checkout
